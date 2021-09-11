@@ -1,6 +1,4 @@
 // Import the functions you need from the SDKs you need
-// import firebase from "firebase/app";
-// import firebase from "firebase/firebase-app";
 import { initializeApp } from "firebase/app";
 import { 
   initializeAuth, getAuth, 
@@ -9,6 +7,13 @@ import {
   browserPopupRedirectResolver,
   GithubAuthProvider, GoogleAuthProvider, 
 } from "firebase/auth"
+import { 
+  getFirestore, 
+  collection, 
+  doc,
+  addDoc, getDocs, onSnapshot
+} from "firebase/firestore";
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -21,8 +26,6 @@ const firebaseConfig = {
   messagingSenderId: process.env.REACT_APP_MESSAGEING_SENDER_ID,
   appId: process.env.REACT_APP_APP_ID,
 };
-
-
 const app = initializeApp(firebaseConfig);
 export const authService = initializeAuth(app);
 export const auth = {
@@ -32,3 +35,7 @@ export const auth = {
   browserPopupRedirectResolver,
   GoogleAuthProvider, GithubAuthProvider,
 }
+export const dbService = getFirestore();
+export const db = {
+  collection, doc, addDoc, getDocs, onSnapshot
+};
