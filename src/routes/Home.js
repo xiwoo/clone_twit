@@ -1,30 +1,27 @@
 import { useEffect, useState } from "react";
-import { dbService, db } from "fConfig";
+import { dbService, db, storage } from "fConfig";
+import Nweet from "components/Nweet";
+import { v4 as uuidv4 } from "uuid";
 
 const Home = ({userObj}) => {
-  console.log(userObj);
+
   const [ nweet, setNweet ] = useState("");
   const [ nweets, setNweets ] = useState([]);
+  const [ attachment, setAttachment ] = useState("");
 
   const onSubmit = async e => {
     e.preventDefault();
-    const docRef = await db.addDoc(
-      db.collection(dbService, "nweets"),
-      {
-        text: nweet,
-        createAt: Date.now(),
-        creatorId: userObj.uid,
-      }
-    );
-    console.log(docRef);
-    setNweet("");
-  };
-
-  const getNweets = async () => {
-    const dbNweets = await db.getDocs(db.collection(dbService, "nweets"));
-    dbNweets.forEach(doc => {
-      setNweets(x => [{...doc.data(), id: doc.id}, ...x]);
-    });
+    // await db.addDoc(
+    //   db.collection(dbService, "nweets"),
+    //   {
+    //     text: nweet,
+    //     createAt: Date.now(),
+    //     creatorId: userObj.uid,
+    //   }
+    // );
+    // setNweet("");
+    console.log(storage);
+    storage.ref().child(`${userObj.uid}/${uuidv4()}`);
   };
 
   const onChange = e => {
@@ -35,15 +32,30 @@ const Home = ({userObj}) => {
     setNweet(value);
   };
 
+  const onFileChange = e => {
+    const {
+      target: {files},
+    } = e;
+    const theFile = files[0];
+    console.log(theFile);
+    const reader = new FileReader();
+    reader.onloadend = e => {
+      const {
+        currentTarget: {result},
+      } = e;
+      setAttachment(result);
+    };
+    reader.readAsDataURL(theFile);
+  };
+
+  const onClearAttachment = () => setAttachment("");
+
   useEffect(() => {
     db.onSnapshot(
-      db.doc(dbService, "", ""),
-      doc => {
-        console.log("");
-      }
+      db.collection(dbService, "nweets"),
+      ss => setNweets(ss.docs.map(x => ({id: x.id, ...x.data()})))
     );
   }, []);
-
 
   return (
     <>
@@ -55,14 +67,23 @@ const Home = ({userObj}) => {
           placeholder="What's on your mind?"
           maxLength={120}
         />
+        <input type="file" accept="image/*" onChange={onFileChange} />
         <input type="submit" value="Nweet" />
+        {attachment && (
+          <div>
+            <img src={attachment} width="50px" height="50px" />
+            <button onClick={onClearAttachment} >Clear</button>
+          </div>
+        )}
       </form>
       <div>
-        {nweets.map(n => (
-          <div key={n.id}>
-            <h4>{n.text}</h4>
-          </div>
-        ))}
+        {nweets.map(n => 
+          <Nweet
+            key={n.id}
+            nweetObj={n}  
+            isOwner={n.creatorId === userObj.uid}
+          />
+        )}
       </div>
     </>
   )
