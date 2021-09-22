@@ -9,10 +9,13 @@ import {
 } from "firebase/auth"
 import { 
   getFirestore, 
-  collection, 
-  doc,
-  addDoc, getDocs, onSnapshot
+  collection, doc,
+  addDoc, getDocs, onSnapshot, deleteDoc, updateDoc
 } from "firebase/firestore";
+
+import {
+  getStorage
+} from "firebase/storage";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -26,7 +29,10 @@ const firebaseConfig = {
   messagingSenderId: process.env.REACT_APP_MESSAGEING_SENDER_ID,
   appId: process.env.REACT_APP_APP_ID,
 };
+
 const app = initializeApp(firebaseConfig);
+
+//auth
 export const authService = initializeAuth(app);
 export const auth = {
   getAuth,
@@ -35,7 +41,12 @@ export const auth = {
   browserPopupRedirectResolver,
   GoogleAuthProvider, GithubAuthProvider,
 }
-export const dbService = getFirestore();
+
+//db store
+export const dbService = getFirestore(app);
 export const db = {
-  collection, doc, addDoc, getDocs, onSnapshot
+  collection, doc, 
+  addDoc, getDocs, onSnapshot, deleteDoc, updateDoc
 };
+
+export const storage = getStorage(app);
