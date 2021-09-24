@@ -14,7 +14,8 @@ import {
 } from "firebase/firestore";
 
 import {
-  getStorage
+  getStorage, 
+  ref, uploadString, getDownloadURL, deleteObject
 } from "firebase/storage";
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -49,4 +50,7 @@ export const db = {
   addDoc, getDocs, onSnapshot, deleteDoc, updateDoc
 };
 
-export const storage = getStorage(app);
+export const storageService = getStorage(app);
+export const storage = {
+  ref, uploadString, getDownloadURL, deleteObject
+}
