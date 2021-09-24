@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { dbService, db, storage } from "fConfig";
+import { dbService, db, storageService, storage } from "fConfig";
 import Nweet from "components/Nweet";
 import { v4 as uuidv4 } from "uuid";
 
@@ -11,17 +11,24 @@ const Home = ({userObj}) => {
 
   const onSubmit = async e => {
     e.preventDefault();
-    // await db.addDoc(
-    //   db.collection(dbService, "nweets"),
-    //   {
-    //     text: nweet,
-    //     createAt: Date.now(),
-    //     creatorId: userObj.uid,
-    //   }
-    // );
-    // setNweet("");
-    console.log(storage);
-    storage.ref().child(`${userObj.uid}/${uuidv4()}`);
+    let attachmentURL = "";
+    if(attachment !== "") {
+      const ref = storage.ref(storageService, `${userObj.uid}/${uuidv4()}`);
+      const response = await storage.uploadString(ref, attachment, 'data_url');
+      attachmentURL = await storage.getDownloadURL(response.ref);
+    }
+
+    await db.addDoc(
+      db.collection(dbService, "nweets"),
+      {
+        text: nweet,
+        createAt: Date.now(),
+        creatorId: userObj.uid,
+        attachmentURL,
+      }
+    );
+    setNweet("");
+    setAttachment("");
   };
 
   const onChange = e => {
@@ -37,15 +44,16 @@ const Home = ({userObj}) => {
       target: {files},
     } = e;
     const theFile = files[0];
-    console.log(theFile);
-    const reader = new FileReader();
-    reader.onloadend = e => {
-      const {
-        currentTarget: {result},
-      } = e;
-      setAttachment(result);
-    };
-    reader.readAsDataURL(theFile);
+    if(theFile) {
+      const reader = new FileReader();
+      reader.onloadend = e => {
+        const {
+          currentTarget: {result},
+        } = e;
+        setAttachment(result);
+      };
+      reader.readAsDataURL(theFile);
+    }
   };
 
   const onClearAttachment = () => setAttachment("");

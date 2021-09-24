@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { dbService, db } from "fConfig";
+import { dbService, db, storageService, storage } from "fConfig";
 
 const Nweet = ({nweetObj, isOwner}) => {
 
@@ -9,6 +9,10 @@ const Nweet = ({nweetObj, isOwner}) => {
   const onDeleteClick = async () => {
     if(window.confirm("삭제하시겠습니까?")) {
       await db.deleteDoc(db.doc(dbService, `nweets/${nweetObj.id}`));
+      if(nweetObj.attachmentURL !== "") {
+        const ref = storage.ref(storageService, nweetObj.attachmentURL);
+        await storage.deleteObject(ref);
+      }
     }
   };
 
@@ -42,6 +46,11 @@ const Nweet = ({nweetObj, isOwner}) => {
         ) : (
           <>
             <h4>{nweetObj.text}</h4>
+            {
+              nweetObj.attachmentURL && (
+                <img src={nweetObj.attachmentURL} width="50px" height="50px" />
+              )
+            }
             {
               isOwner && (
                 <>
