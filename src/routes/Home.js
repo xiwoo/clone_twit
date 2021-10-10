@@ -9,6 +9,17 @@ const Home = ({userObj}) => {
   const [ nweets, setNweets ] = useState([]);
   const [ attachment, setAttachment ] = useState("");
 
+  useEffect(() => {
+    db.onSnapshot(
+      // db.doc(dbService, "nweets"),
+      db.collection(dbService, "nweets"),
+      snapshot => {
+        // console.log(snapshot);
+        setNweets(snapshot.docs.map(x => ({id: x.id, ...x.data()})));
+      }
+    );
+  }, []);
+
   const onSubmit = async e => {
     e.preventDefault();
     let attachmentURL = "";
@@ -22,7 +33,7 @@ const Home = ({userObj}) => {
       db.collection(dbService, "nweets"),
       {
         text: nweet,
-        createAt: Date.now(),
+        createdAt: Date.now(),
         creatorId: userObj.uid,
         attachmentURL,
       }
@@ -57,13 +68,6 @@ const Home = ({userObj}) => {
   };
 
   const onClearAttachment = () => setAttachment("");
-
-  useEffect(() => {
-    db.onSnapshot(
-      db.collection(dbService, "nweets"),
-      ss => setNweets(ss.docs.map(x => ({id: x.id, ...x.data()})))
-    );
-  }, []);
 
   return (
     <>
