@@ -48,8 +48,7 @@ const Auth = () => {
     } else if(name === "github") {
       provider = new auth.GithubAuthProvider();
     }
-    const data = await auth.signInWithPopup(authService, provider, auth.browserPopupRedirectResolver)
-    console.log(data);
+    await auth.signInWithPopup(authService, provider, auth.browserPopupRedirectResolver)
   }
 
   return (
