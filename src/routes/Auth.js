@@ -1,48 +1,18 @@
 import { authService, auth } from "fConfig";
-import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTwitter, faGoogle, faGithub } from "@fortawesome/free-brands-svg-icons";
+import AuthForm from 'components/AuthForm';
 
 const Auth = () => {
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [newAccount, setNewAccount] = useState(true);
-  const [error, setError] = useState("");
-
-  const onChange = (event) => {
-    const {
-      target: {name, value},
-    } = event;
-    if(name === "email") {
-      setEmail(value);
-    } else if(name === "password") {
-      setPassword(value);
-    }
-  };
-
-  const onSubmit = async (event) => {
-    event.preventDefault();
-    try {
-      let data;
-      if(newAccount) {
-        data = await auth.createUserWithEmailAndPassword(authService, email, password);
-      } 
-      else {
-        data = await auth.signInWithEmailAndPassword(authService, email, password);
-      }
-      // console.log(data);
-    } catch(e) {
-      setError(e.message);
-    }
-  }
-
-  const toggleAccount = () => setNewAccount(prev => !prev);
-
   const onSocialClick = async event => {
-    console.log(event.target.name);
+
     const {
       target: {name},
     } = event;
+
     let provider;
+
     if(name === "google") {
       provider = new auth.GoogleAuthProvider();
     } else if(name === "github") {
@@ -52,22 +22,20 @@ const Auth = () => {
   }
 
   return (
-    <div>
-      <form onSubmit={onSubmit}>
-        <input type="email" name="email" placeholder="Email" required value={email} onChange={onChange} />
-        <input type="password" name="password" placeholder="Password" required value={password} onChange={onChange}/>
-        <input type="submit" value="Log In" value={newAccount ? "Create Account" : "Log In"}/>
-        {error}
-      </form>
-      <span onClick={toggleAccount}>
-        {newAccount ? "Sign In" : "Create Account"}
-      </span>
-      <div>
-        <button onClick={onSocialClick} name="google">
-          Continue with Google
+    <div className="authContainer">
+      <FontAwesomeIcon
+        icon={faTwitter}
+        color="#04AAFF"
+        size="3x"
+        style={{marginBottom: 30}}
+      />
+      <AuthForm />
+      <div className="authBtns">
+        <button onClick={onSocialClick} name="google" className="authBtn">
+          Continue with Google <FontAwesomeIcon icon={faGoogle} />
         </button>
-        <button onClick={onSocialClick} name="github">
-          Continue with Github
+        <button onClick={onSocialClick} name="github" className="authBtn">
+          Continue with Github <FontAwesomeIcon icon={faGithub} />
         </button>
       </div> 
     </div>
