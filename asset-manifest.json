@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.js": "/clone_twit/static/js/main.e812edbc.chunk.js",
-    "main.js.map": "/clone_twit/static/js/main.e812edbc.chunk.js.map",
-    "runtime-main.js": "/clone_twit/static/js/runtime-main.03f6dcb4.js",
-    "runtime-main.js.map": "/clone_twit/static/js/runtime-main.03f6dcb4.js.map",
-    "static/js/2.43c1dd64.chunk.js": "/clone_twit/static/js/2.43c1dd64.chunk.js",
-    "static/js/2.43c1dd64.chunk.js.map": "/clone_twit/static/js/2.43c1dd64.chunk.js.map",
-    "index.html": "/clone_twit/index.html",
-    "static/js/2.43c1dd64.chunk.js.LICENSE.txt": "/clone_twit/static/js/2.43c1dd64.chunk.js.LICENSE.txt"
+    "main.js": "/xiwoo/clone_twit/static/js/main.2688432f.chunk.js",
+    "main.js.map": "/xiwoo/clone_twit/static/js/main.2688432f.chunk.js.map",
+    "runtime-main.js": "/xiwoo/clone_twit/static/js/runtime-main.de58132c.js",
+    "runtime-main.js.map": "/xiwoo/clone_twit/static/js/runtime-main.de58132c.js.map",
+    "static/js/2.05858ecf.chunk.js": "/xiwoo/clone_twit/static/js/2.05858ecf.chunk.js",
+    "static/js/2.05858ecf.chunk.js.map": "/xiwoo/clone_twit/static/js/2.05858ecf.chunk.js.map",
+    "index.html": "/xiwoo/clone_twit/index.html",
+    "static/js/2.05858ecf.chunk.js.LICENSE.txt": "/xiwoo/clone_twit/static/js/2.05858ecf.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.03f6dcb4.js",
-    "static/js/2.43c1dd64.chunk.js",
-    "static/js/main.e812edbc.chunk.js"
+    "static/js/runtime-main.de58132c.js",
+    "static/js/2.05858ecf.chunk.js",
+    "static/js/main.2688432f.chunk.js"
   ]
 }
