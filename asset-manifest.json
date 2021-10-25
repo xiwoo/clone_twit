@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/xiwoo/clone_twit/static/css/main.c407f742.chunk.css",
-    "main.js": "/xiwoo/clone_twit/static/js/main.7e7ee960.chunk.js",
-    "main.js.map": "/xiwoo/clone_twit/static/js/main.7e7ee960.chunk.js.map",
-    "runtime-main.js": "/xiwoo/clone_twit/static/js/runtime-main.de58132c.js",
-    "runtime-main.js.map": "/xiwoo/clone_twit/static/js/runtime-main.de58132c.js.map",
-    "static/js/2.ea3df721.chunk.js": "/xiwoo/clone_twit/static/js/2.ea3df721.chunk.js",
-    "static/js/2.ea3df721.chunk.js.map": "/xiwoo/clone_twit/static/js/2.ea3df721.chunk.js.map",
-    "index.html": "/xiwoo/clone_twit/index.html",
-    "static/css/main.c407f742.chunk.css.map": "/xiwoo/clone_twit/static/css/main.c407f742.chunk.css.map",
-    "static/js/2.ea3df721.chunk.js.LICENSE.txt": "/xiwoo/clone_twit/static/js/2.ea3df721.chunk.js.LICENSE.txt"
+    "main.css": "/clone_twit/static/css/main.c407f742.chunk.css",
+    "main.js": "/clone_twit/static/js/main.7e7ee960.chunk.js",
+    "main.js.map": "/clone_twit/static/js/main.7e7ee960.chunk.js.map",
+    "runtime-main.js": "/clone_twit/static/js/runtime-main.03f6dcb4.js",
+    "runtime-main.js.map": "/clone_twit/static/js/runtime-main.03f6dcb4.js.map",
+    "static/js/2.6335f562.chunk.js": "/clone_twit/static/js/2.6335f562.chunk.js",
+    "static/js/2.6335f562.chunk.js.map": "/clone_twit/static/js/2.6335f562.chunk.js.map",
+    "index.html": "/clone_twit/index.html",
+    "static/css/main.c407f742.chunk.css.map": "/clone_twit/static/css/main.c407f742.chunk.css.map",
+    "static/js/2.6335f562.chunk.js.LICENSE.txt": "/clone_twit/static/js/2.6335f562.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.de58132c.js",
-    "static/js/2.ea3df721.chunk.js",
+    "static/js/runtime-main.03f6dcb4.js",
+    "static/js/2.6335f562.chunk.js",
     "static/css/main.c407f742.chunk.css",
     "static/js/main.7e7ee960.chunk.js"
   ]
